@@ -38,12 +38,6 @@ public class UserService {
         }
     }
 
-//    public int findTotalRecord() throws IOException {
-//        int totalRecord = count("records.csv");
-//        return totalRecord;
-//    }
-
-
     public Integer calculatePercentage(int total, int processedValue) {
         return processedValue * 100 / total;
     }

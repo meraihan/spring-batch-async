@@ -15,9 +15,4 @@ public class Users implements Serializable {
     private Long id;
     private String firstname;
     private String phone;
-
-    public Users(String firstname, String phone) {
-        this.firstname = firstname;
-        this.phone = phone;
-    }
 }

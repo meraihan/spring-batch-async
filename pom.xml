@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.zoracorp</groupId>
-	<artifactId>spring-batch-csv</artifactId>
+	<artifactId>spring-batch-async</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-batch-csv</name>
+	<name>spring-batch-async</name>
 	<description>Demo Application to upload csv data using spring batch</description>
 
 	<properties>
