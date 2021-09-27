@@ -111,8 +111,6 @@ public class SpringBatchConfig {
     @SuppressWarnings("unchecked")
     @Bean
     public Step step1() throws Exception {
-        int lineNumberWithoutHeader = (int) (Files.lines(Paths.get(filePath)).count());
-        System.out.println("Total Record-> " +lineNumberWithoutHeader);
         return stepBuilderFactory.get("step1")
                 .chunk(50)
                 .reader(reader())
