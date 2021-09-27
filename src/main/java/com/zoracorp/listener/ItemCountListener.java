@@ -25,13 +25,16 @@ public class ItemCountListener implements ChunkListener {
     @SneakyThrows
     @Override
     public void afterChunk(ChunkContext context) {
-        Integer totalRecord = (int) context.getStepContext().getJobExecutionContext().get("totalRecord");
-        BatchPercentage percentage = new BatchPercentage();
+        int totalRecord = (int) context.getStepContext().getJobExecutionContext().get("totalRecord");
         int processedChunk = context.getStepContext().getStepExecution().getReadCount();
-        System.out.println("Item Processed: " + processedChunk );
+        int calculatePercentage = userService.calculatePercentage(totalRecord, processedChunk);
+        System.out.println("Item Processed: " + processedChunk);
+        System.out.println("Percentage: "+calculatePercentage);
         String batchId = String.valueOf(context.getStepContext().getJobParameters().get("time"));
+
+        BatchPercentage percentage = new BatchPercentage();
         percentage.setBatchId(batchId);
-        percentage.setPercentage(userService.calculatePercentage(totalRecord, processedChunk));
+        percentage.setPercentage(calculatePercentage);
         BatchPercentage findPercentage = repo.findByBatchId(batchId);
         if (findPercentage.getId()==0) {
             repo.add(percentage);
@@ -39,9 +42,13 @@ public class ItemCountListener implements ChunkListener {
             percentage.setId(findPercentage.getId());
             repo.update(percentage);
         }
+
     }
 
     @Override
     public void afterChunkError(ChunkContext context) {
     }
+
+
+
 }
