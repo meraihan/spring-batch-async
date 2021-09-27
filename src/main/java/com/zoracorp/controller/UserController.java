@@ -32,8 +32,6 @@ public class UserController {
 
     @Autowired TaskExecutor threadPoolTaskExecutor;
 
-    @Value("${file.path}")
-    private String filePath;
 
     @PostMapping("/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
@@ -43,11 +41,7 @@ public class UserController {
         }
         try {
             System.out.println("Start File upload process...");
-            IOUtils.copy(file.getInputStream(), new FileOutputStream(filePath));
-            JobParameters jobParameters =
-                    new JobParametersBuilder()
-                            .addLong("time", System.currentTimeMillis()).toJobParameters();
-            System.out.println("JobID: "+ jobParameters.getParameters().get("time"));
+            JobParameters jobParameters = userService.processFile(file);
             batchId = String.valueOf(jobParameters.getParameters().get("time"));
             threadPoolTaskExecutor.execute(() -> {
                 try {
