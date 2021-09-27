@@ -19,7 +19,7 @@ public class JobListener extends JobExecutionListenerSupport {
     @SneakyThrows
     @Override
     public void beforeJob(JobExecution jobExecution){
-        int totalRecord = (int) (Files.lines(Paths.get(filePath)).count() - 1);
+        int totalRecord = (int) (Files.lines(Paths.get(filePath)).count());
         jobExecution.getExecutionContext().put("totalRecord", totalRecord);
 
         System.out.println("Total Record: "+ totalRecord);
