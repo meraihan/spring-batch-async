@@ -93,7 +93,7 @@ public class SpringBatchConfig {
         executor.setCorePoolSize(100);
         executor.setMaxPoolSize(1000);
         executor.setQueueCapacity(1000);
-        executor.setThreadNamePrefix("SilverbirdExecutor-");
+        executor.setThreadNamePrefix("TreeWayExecutor-");
         executor.initialize();
         return executor;
     }
